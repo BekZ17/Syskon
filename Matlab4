@@ -1,1 +1,32 @@
 %Forkmans Änglar represent
+%%
+%Variablar 
+
+Mx_last=21;
+Mn_last=17;
+Mx_hast=0.2;
+Pr_hast: 0.15;
+Mn_hast=0.1;
+Mn_Acc=0.02;
+Mx=Acc=;
+g=9.81;
+Vinkel_trapp=34;
+Vinkel_max= 80;
+Posx_start=0;
+Posx_slut=168;
+Posy_start=0;
+Posy_slut=114.13;
+
+% Ekvationer
+
+e=
+int= integral(e, 0, t);
+dev=diff(e);
+
+For(){
+
+P_kontroll=Kp.*e;
+PI_kontroll=Kp.*e+Ki,*int;
+PID_kontroll=Kp.*e+Ki.*int+Kd.*dev:
+
+}
