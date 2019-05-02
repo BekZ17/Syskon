@@ -16,6 +16,8 @@ Posx_start=0;
 Posx_slut=168;
 Posy_start=0;
 Posy_slut=114.13;
+Posx_nu;
+Posy_nu;
 
 % Ekvationer
 
@@ -23,10 +25,10 @@ e=
 int= integral(e, 0, t);
 dev=diff(e);
 
-For(){
+While(Posx_nu< 168 && Posy_nu< 114,13) { 
 
 P_kontroll=Kp.*e;
-PI_kontroll=Kp.*e+Ki,*int;
+PI_kontroll=Kp.*e+Ki.*int;
 PID_kontroll=Kp.*e+Ki.*int+Kd.*dev:
 
 }
