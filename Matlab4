@@ -43,12 +43,10 @@ acceleration(1)=0.02;
 % definiera en tidsvektor. Den används bara vid plottning av resultaten
 tid = (1:N) * dT ;
 
-VIKTIGT?
-% Definiera en vektor för att spara motorströmmen
-% i_EM=zeros(1,N); %?
+
 
 for i= 1:N
-
+  
 
 end
 
@@ -60,6 +58,10 @@ end
 
 
 COPY PASTED, TA MED?!?!?
+
+VIKTIGT?
+% Definiera en vektor för att spara motorströmmen
+% i_EM=zeros(1,N); %?
 
 % Definera alla systemts insignaler för hela den tid soms kall simuleras
 acceleration(1:10)=0.15;  % (m/s^2) INTE ÄNDRADE VÄRDEN
