@@ -1,6 +1,7 @@
 %Forkmans Änglar represent
 %%
-%Variablar 
+
+% Variablar 
 
 g=9.81;
 Vinkel_trapp=34;
@@ -11,17 +12,21 @@ Mx_hast=0.2;
 Pr_hast: 0.15;
 Mn_hast=0.1;
 Mn_Acc=0.02;
-Mx=Acc=;
+Mx_Acc=;
 
-k_T=0.048 ; % (Nm/A), likströmsmotorns momentkonstant   INTE ÄNDRAD
-k_e=k_T ; % (Vs), likströmsmotorns spänningskonstant   INTE ÄNDRAD
-R_EM=1.51 ; % (ohm), resistansen i motorns ankarlindning
-T_frictEM = 0.011 ; % (Nm) friktionsmoment i elmotorn
+% Motor och växellåda variablar
+
+k_T=0.009074 ; % (Nm/A), likströmsmotorns momentkonstant   
+k_e=k_T ; % (Vs), likströmsmotorns spänningskonstant  
+R_EM=0.71 ; % (ohm), resistansen i motorns ankarlindning
+T_frictEM = 0.011 ; % (Nm) friktionsmoment i elmotorn RÄTT?
 eta_KraftEl = 1 ; % verkningsgrad för kraftelektroniken = 100%
-U_Batt = 12 ; % (V) batterispänning (antas konstant oberoende av batteriström)
+U_Batt = 12 ; % (V) batterispänning (antas konstant oberoende av batteriström) ÄNDRA OM INTE PARALLELKOPPLA
 
-% total omvandlingsfaktor mellan elmotorns varvtal och gaffelns hastighet:
-k1= ; (((2.*pi)/60).*n.*r)(1/150); % (1/m)
+% total omvandlingsfaktor mellan elmotorns varvtal och robotens hastighet:
+k1= (((2.*pi)/60).*r)(1/150); % (1/m)
+
+% Tidsgrejer
 
 dT=0.1 ; % (s), tidssteg för simuleringen
 T=40 ; % tid att simulera
@@ -30,25 +35,37 @@ N=round(T/dT) ; % antal steg att simulera avrundat till heltal
 
 % Definera vektorer att spara tillstånden och insignalerna i
 hastighet=zeros(1,N);
-sträcka=zeros(1,N);
+sträcka=zeros(1,N); HA MED?
 acceleration=zeros(1,N);
 % tilldela startvärden på tillstånden
-hastighet(1)=0 ;
-sträcka(1)=0 ;
+hastighet(1)=0.1;
+acceleration(1)=0.02;
 % definiera en tidsvektor. Den används bara vid plottning av resultaten
 tid = (1:N) * dT ;
 
+VIKTIGT?
 % Definiera en vektor för att spara motorströmmen
 % i_EM=zeros(1,N); %?
+
+for i= 1:N
+
+
+end
+
+
+
+
+
+
+
+
+COPY PASTED, TA MED?!?!?
 
 % Definera alla systemts insignaler för hela den tid soms kall simuleras
 acceleration(1:10)=0.15;  % (m/s^2) INTE ÄNDRADE VÄRDEN
 acceleration(101:110)=-0.15; INTE ÄNDRADE VÄRDEN
 acceleration(201:210)=-0.15; INTE ÄNDRADE VÄRDEN
 acceleration(301:310)=0.15; INTE ÄNDRADE VÄRDEN
-
-
-
 
 for i=1:N
 
@@ -77,8 +94,4 @@ for i=1:N
 % för tillstånden
 end
 
-VET INTE
 
-e=
-int= integral(e, 0, t);
-dev=diff(e);
