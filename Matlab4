@@ -2,10 +2,8 @@
 %%
 
 % Variablar 
-
 g=9.81;
-Vinkel_trapp=34;
-Vinkel_max= 80;
+
 Mx_last=21;
 Mn_last=17;
 Mx_hast=0.2;
@@ -13,25 +11,6 @@ Pr_hast: 0.15;
 Mn_hast=0.1;
 Mn_Acc=0.02;
 Mx_Acc=;
-
-% Motor och växellåda variablar
-
-k_T=0.009074 ; % (Nm/A), likströmsmotorns momentkonstant   
-k_e=k_T ; % (Vs), likströmsmotorns spänningskonstant  
-R_EM=0.71 ; % (ohm), resistansen i motorns ankarlindning
-T_frictEM = 0.011 ; % (Nm) friktionsmoment i elmotorn RÄTT?
-eta_KraftEl = 1 ; % verkningsgrad för kraftelektroniken = 100%
-U_Batt = 12 ; % (V) batterispänning (antas konstant oberoende av batteriström) ÄNDRA OM INTE PARALLELKOPPLA
-
-% total omvandlingsfaktor mellan elmotorns varvtal och robotens hastighet:
-k1= (((2.*pi)/60).*r)(1/150); % (1/m)
-
-% Tidsgrejer
-
-dT=0.1 ; % (s), tidssteg för simuleringen
-T=40 ; % tid att simulera
-N=round(T/dT) ; % antal steg att simulera avrundat till heltal
-
 
 % Definera vektorer att spara tillstånden och insignalerna i
 hastighet=zeros(1,N);
@@ -43,65 +22,24 @@ acceleration(1)=0.02;
 % definiera en tidsvektor. Den används bara vid plottning av resultaten
 tid = (1:N) * dT ;
 
+% Tidsgrejer
+
+dT=0.1 ; % (s), tidssteg för simuleringen
+T=40 ; % tid att simulera
+N=round(T/dT) ; % antal steg att simulera avrundat till heltal
+
 K=;
-Ti=;
-Td=;
+% Ti=;
+% Td=;
 m= Mx_last;
 P= K(r(t)-y(t)) % r= referenssignal, y= insignal, ström?
-PI= K(r(t)-y(t)+ (1/T_i))
-PID= K(r(t)-y(t)) 
+% PI= K(r(t)-y(t)+ (1/T_i))
+% PID= K(r(t)-y(t)) 
 
 for i= 1:N
     u= P;
     a = (F+F.*u)./m;
     v = int(a); %integral av acceleration för att få ut hastighet
-end
-
-
-
-
-
-
-
-COPY PASTED, TA MED?!?!?
-
-
-
-VIKTIGT?
-% Definiera en vektor för att spara motorströmmen
-% i_EM=zeros(1,N); %?
-
-% Definera alla systemts insignaler för hela den tid soms kall simuleras
-acceleration(1:10)=0.15;  % (m/s^2) INTE ÄNDRADE VÄRDEN
-acceleration(101:110)=-0.15; INTE ÄNDRADE VÄRDEN
-acceleration(201:210)=-0.15; INTE ÄNDRADE VÄRDEN
-acceleration(301:310)=0.15; INTE ÄNDRADE VÄRDEN
-
-for i=1:N
-
-    F_Last(i) = Mx_last * g + Mx_last*acceleration(i) ;
-    T_EM(i) = F_Last(i) / k1 ;
-    % Glöm inte att lägga till förlusterna i växeln då ni beräknar
-    % elmotorns vridmoment (här finns ingen växel.
-    w_EM(i) = hastighet(i) * k1 ;
-    T_EMintern(i) = T_EM(i) + T_frictEM * sign(w_EM(i)) ; % Friktionsmomentet skall 
-    % vara noll då lasten står still och negativ då de sänks
-    P_EM(i) = w_EM(i) * T_EM(i) ;
-    
-    I_EM(i) = T_EMintern(i) / k_T ;
-    U_EM(i) = w_EM(i) * k_e + R_EM * I_EM(i) ;
-    P_Batt(i) = U_EM(i) * I_EM(i) / eta_KraftEl ; 
-    I_Batt(i) = P_Batt(i) / U_Batt ;
-    
-    
-    % Uppdatera tillstånden till nästa tidssteg (euler-metoden)
-    if i<N
-        hastighet(i+1)       = hastighet(i)        + dT *acceleration(i) ;
-        sträcka(i+1)       = sträcka(i)        + dT * hastighet(i) ;
-    end
-
-% Här är hela tidsperioden simulerad, och resultatet ligger ny i vektorerna
-% för tillstånden
 end
 
 
